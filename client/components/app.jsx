@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React from 'react';
 import Header from './header';
 import GradeTable from './grade-table';
@@ -6,16 +5,15 @@ import GradeTable from './grade-table';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { grades: [] };
+    this.state = {
+      grades: [],
+      average: null
+    };
     this.getAllGrades = this.getAllGrades.bind(this);
   }
 
   componentDidMount() {
     this.getAllGrades();
-  }
-
-  componentDidUpdate() {
-    console.log(this.state.grades);
   }
 
   getAllGrades() {
