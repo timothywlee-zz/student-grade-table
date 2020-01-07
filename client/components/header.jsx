@@ -1,7 +1,6 @@
 import React from 'react';
 
 function Header(props) {
-  console.log('props.average: ', props.average);
   return (
     <div className='d-flex flow-row justify-content-between'>
       <div className='title font-weight-bold w-80 p-3'> Student Grade Table </div>
