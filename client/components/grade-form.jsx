@@ -12,6 +12,7 @@ class GradeForm extends React.Component {
     this.handleChangeCourse = this.handleChangeCourse.bind(this);
     this.handleChangeGrade = this.handleChangeGrade.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleReset = this.handleReset.bind(this);
   }
 
   handleChangeName(event) {
@@ -26,7 +27,7 @@ class GradeForm extends React.Component {
     this.setState({ grade: event.target.value });
   }
 
-  handleSubmit(event) { // click 'add' button
+  handleSubmit(event) {
     event.preventDefault();
     const createNewStudent = {
       name: this.state.name,
@@ -41,10 +42,14 @@ class GradeForm extends React.Component {
     });
   }
 
-  // handleReset(event){ //click 'cancel' button
-  //   event.preventDefault(); //called on the event when submitting the form to prevent a browswer reload/refresh
-
-  // }
+  handleReset(event) {
+    event.preventDefault();
+    this.setState({
+      name: '',
+      course: '',
+      grade: ''
+    });
+  }
 
   render() {
     const valueOfName = this.state.name;
@@ -52,18 +57,36 @@ class GradeForm extends React.Component {
     const valueOfGrade = this.state.grade;
 
     return (
-      <div className='addGradeContainer d-flex flex-row'>
-        <form className='d-flex flex-column' onSubmit={this.handleSubmit}>
-          <div className='inputContainer d-flex flex-column col-xs-3'>
-            <input className='form-control' type='text' value={valueOfName} placeholder='Name' onChange={this.handleChangeName} />
-            <input className='form-control' type='text' value={valueOfCourse} placeholder='Course ' onChange={this.handleChangeCourse} />
-            <input className='form-control' type='text' value={valueOfGrade} placeholder='Grade' onChange={this.handleChangeGrade} />
-          </div>
-          <div className='buttonsContainer'>
-            <button type='submit' className='btn btn-primary'> Add </button>
-            <button type='submit' className='btn btn-secondary'> Cancel </button>
-          </div>
-        </form>
+      <div>
+        <div className='addGradeTitle font-weight-bold'> Add Grade </div>
+        <div>
+          <form className='d-flex flex-column' onSubmit={this.handleSubmit}>
+            <div className='inputContainer d-flex flex-column col-xs-3'>
+
+              <div className='input-group-prepend'>
+                <i className='fas fa-user input-group-text'></i>
+                <input className='form-control' type='text' value={valueOfName} placeholder='Name' onChange={this.handleChangeName} />
+              </div>
+
+              <div className='input-group-prepend'>
+                <i className='fas fa-book-open input-group-text'></i>
+                <input className='form-control' type='text' value={valueOfCourse} placeholder='Course ' onChange={this.handleChangeCourse} />
+              </div>
+
+              <div className='input-group-prepend'>
+                <i className='fas fa-graduation-cap input-group-text'></i>
+                <input className='form-control' type='text' value={valueOfGrade} placeholder='Grade' onChange={this.handleChangeGrade} />
+              </div>
+
+            </div>
+            <div className='btn-group'>
+              <button type='submit' className='btn btn-primary col-6'> Add </button>
+              <div className='btn-group' onClick={this.handleReset}>
+                <button type='reset' className='btn btn-secondary col-12'> Cancel </button>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     );
   }

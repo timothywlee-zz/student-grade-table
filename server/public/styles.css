@@ -6,10 +6,14 @@
   height: 50%;
   width: 30%;
   font-size: 1.5rem;
-  margin: 6% 0 0 0;
+  margin: 4% 0 0 0;
   text-align: justify;
 }
 
 .badge{
   line-height: 0.3;
+}
+
+.addGradeTitle {
+  font-size: 20px;
 }

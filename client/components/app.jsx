@@ -7,11 +7,10 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      grades: [],
-      average: null
+      grades: []
     };
     this.getAllGrades = this.getAllGrades.bind(this);
-    this.addStudent = this.addStudent.bind(this)
+    this.addStudent = this.addStudent.bind(this);
     this.getAverageGrade = this.getAverageGrade.bind(this);
   }
 
@@ -26,8 +25,7 @@ class App extends React.Component {
       })
       .then(data => {
         this.setState({
-          grades: data,
-          average: this.getAverageGrade(data)
+          grades: data
         });
       })
       .catch(err => {
@@ -47,7 +45,6 @@ class App extends React.Component {
         return response.json();
       })
       .then(data => {
-        console.log(this);
         const arrayDeepCopy = this.state.grades.map(student => Object.assign({}, student));
         arrayDeepCopy.push(data);
         this.setState({
@@ -59,13 +56,13 @@ class App extends React.Component {
       });
   }
 
-  getAverageGrade(data) {
-    const totalStudents = data.length;
+  getAverageGrade() {
+    const totalStudents = this.state.grades.length;
     let totalSum = 0;
     const averageArray = [];
 
     for (let index = 0; index < totalStudents; index++) {
-      const eachStudentGrade = data[index].grade;
+      const eachStudentGrade = this.state.grades[index].grade;
       averageArray.push(eachStudentGrade);
     }
     averageArray.forEach(function (grade) {
@@ -78,8 +75,8 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <Header average={this.state.average} />
-        <div>
+        <Header average={this.getAverageGrade()} />
+        <div className='d-flex flex-row'>
           <GradeTable grades={this.state.grades} />
           <GradeForm onSubmit={this.addStudent}/>
         </div>

@@ -14,7 +14,7 @@ function GradeTable(props) {
     );
   } else {
     return (
-      <table className='table table-striped'>
+      <table className='table table-striped w-75'>
         <thead>
           <tr>
             <th> Student Name </th>
