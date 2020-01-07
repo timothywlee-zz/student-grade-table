@@ -1,15 +1,16 @@
 import React from 'react';
 import Header from './header';
 import GradeTable from './grade-table';
+import GradeForm from './grade-form';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      grades: [],
-      average: null
+      grades: []
     };
     this.getAllGrades = this.getAllGrades.bind(this);
+    this.addStudent = this.addStudent.bind(this);
     this.getAverageGrade = this.getAverageGrade.bind(this);
   }
 
@@ -20,12 +21,11 @@ class App extends React.Component {
   getAllGrades() {
     fetch('/api/grades')
       .then(response => {
-         return response.json();
+        return response.json();
       })
       .then(data => {
         this.setState({
-          grades: data,
-          average: this.getAverageGrade(data)
+          grades: data
         });
       })
       .catch(err => {
@@ -33,29 +33,53 @@ class App extends React.Component {
       });
   }
 
-  getAverageGrade (data) {
-    let totalStudents = data.length;
+  addStudent(studentInfo) {
+    fetch('/api/grades', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(studentInfo)
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        const arrayDeepCopy = this.state.grades.map(student => Object.assign({}, student));
+        arrayDeepCopy.push(data);
+        this.setState({
+          grades: arrayDeepCopy
+        });
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  getAverageGrade() {
+    const totalStudents = this.state.grades.length;
     let totalSum = 0;
     const averageArray = [];
 
-    for(let index = 0; index < totalStudents; index++){
-      let eachStudentGrade = data[index].grade;
+    for (let index = 0; index < totalStudents; index++) {
+      const eachStudentGrade = this.state.grades[index].grade;
       averageArray.push(eachStudentGrade);
     }
-
     averageArray.forEach(function (grade) {
-      totalSum += grade
-    })
-    const averageNumber = Number.parseInt(totalSum / totalStudents).toFixed(0);
-    return averageNumber;
+      totalSum += parseInt(grade);
+    });
+    const averageNumber = parseFloat(totalSum / totalStudents).toFixed(1);
+    return totalStudents === 0 ? 'N/A' : averageNumber;
   }
-
 
   render() {
     return (
       <>
-        <Header average={this.state.average} />
-        <GradeTable grades={this.state.grades} />
+        <Header average={this.getAverageGrade()} />
+        <div className='d-flex flex-row'>
+          <GradeTable grades={this.state.grades} />
+          <GradeForm onSubmit={this.addStudent}/>
+        </div>
       </>
     );
   }
