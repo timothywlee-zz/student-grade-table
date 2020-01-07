@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './header';
 import GradeTable from './grade-table';
+import GradeForm from './grade-form';
 
 class App extends React.Component {
   constructor(props) {
@@ -33,6 +34,29 @@ class App extends React.Component {
       });
   }
 
+  addStudent(studentInfo){
+    fetch('/api/grades', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(studentInfo)
+    })
+      .then (response => {
+        return response.json();
+      })
+      .then(data => {
+        const arrayDeepCopy = this.state.grades.map(student => Object.assign({},student));
+        arrayDeepCopy.push(data);
+        this.setState({
+          grades: arrayDeepCopy
+        })
+      })
+      .catch(err => {
+        console.error(err);
+      })
+  }
+
   getAverageGrade(data) {
     const totalStudents = data.length;
     let totalSum = 0;
@@ -54,7 +78,10 @@ class App extends React.Component {
     return (
       <>
         <Header average={this.state.average} />
-        <GradeTable grades={this.state.grades} />
+        <div>
+          <GradeTable grades={this.state.grades} />
+          <GradeForm />
+        </div>
       </>
     );
   }
