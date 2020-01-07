@@ -11,6 +11,7 @@ class App extends React.Component {
       average: null
     };
     this.getAllGrades = this.getAllGrades.bind(this);
+    this.addStudent = this.addStudent.bind(this)
     this.getAverageGrade = this.getAverageGrade.bind(this);
   }
 
@@ -34,7 +35,7 @@ class App extends React.Component {
       });
   }
 
-  addStudent(studentInfo){
+  addStudent(studentInfo) {
     fetch('/api/grades', {
       method: 'POST',
       headers: {
@@ -42,19 +43,20 @@ class App extends React.Component {
       },
       body: JSON.stringify(studentInfo)
     })
-      .then (response => {
+      .then(response => {
         return response.json();
       })
       .then(data => {
-        const arrayDeepCopy = this.state.grades.map(student => Object.assign({},student));
+        console.log(this);
+        const arrayDeepCopy = this.state.grades.map(student => Object.assign({}, student));
         arrayDeepCopy.push(data);
         this.setState({
           grades: arrayDeepCopy
-        })
+        });
       })
       .catch(err => {
         console.error(err);
-      })
+      });
   }
 
   getAverageGrade(data) {
@@ -66,11 +68,10 @@ class App extends React.Component {
       const eachStudentGrade = data[index].grade;
       averageArray.push(eachStudentGrade);
     }
-
     averageArray.forEach(function (grade) {
-      totalSum += grade;
+      totalSum += parseInt(grade);
     });
-    const averageNumber = Number.parseInt(totalSum / totalStudents).toFixed(0);
+    const averageNumber = parseFloat(totalSum / totalStudents).toFixed(1);
     return totalStudents === 0 ? 'N/A' : averageNumber;
   }
 
@@ -80,7 +81,7 @@ class App extends React.Component {
         <Header average={this.state.average} />
         <div>
           <GradeTable grades={this.state.grades} />
-          <GradeForm />
+          <GradeForm onSubmit={this.addStudent}/>
         </div>
       </>
     );
