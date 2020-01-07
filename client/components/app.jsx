@@ -20,7 +20,7 @@ class App extends React.Component {
   getAllGrades() {
     fetch('/api/grades')
       .then(response => {
-         return response.json();
+        return response.json();
       })
       .then(data => {
         this.setState({
@@ -33,28 +33,27 @@ class App extends React.Component {
       });
   }
 
-  getAverageGrade (data) {
-    let totalStudents = data.length;
+  getAverageGrade(data) {
+    const totalStudents = data.length;
     let totalSum = 0;
     const averageArray = [];
 
-    for(let index = 0; index < totalStudents; index++){
-      let eachStudentGrade = data[index].grade;
+    for (let index = 0; index < totalStudents; index++) {
+      const eachStudentGrade = data[index].grade;
       averageArray.push(eachStudentGrade);
     }
 
     averageArray.forEach(function (grade) {
-      totalSum += grade
-    })
+      totalSum += grade;
+    });
     const averageNumber = Number.parseInt(totalSum / totalStudents).toFixed(0);
-    return averageNumber;
+    return totalStudents === 0 ? 'N/A' : averageNumber;
   }
-
 
   render() {
     return (
       <>
-        <Header average={this.state.average}/>
+        <Header average={this.state.average} />
         <GradeTable grades={this.state.grades} />
       </>
     );
