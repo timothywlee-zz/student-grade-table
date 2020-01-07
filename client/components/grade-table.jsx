@@ -14,12 +14,12 @@ function GradeTable(props) {
     );
   } else {
     return (
-      <table className='studentTable table table-striped'>
+      <table className='table table-striped'>
         <thead>
           <tr>
-            <th scope='row'> Student Name </th>
-            <th scope='row'> Course Name </th>
-            <th scope='row'> Grade </th>
+            <th> Student Name </th>
+            <th> Course Name </th>
+            <th> Grade </th>
           </tr>
           {eachStudentGrade}
         </thead>
