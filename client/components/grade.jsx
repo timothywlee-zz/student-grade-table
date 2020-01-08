@@ -12,7 +12,7 @@ function Grade(props) {
           type='button'
           className='btn btn-danger'
           onClick={ () => props.delete(grade.id) } >
-          DELETE
+          <i className="fas fa-trash-alt"></i>
         </button>
       </td>
     </tr>

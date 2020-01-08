@@ -63,27 +63,27 @@ class GradeForm extends React.Component {
       <div>
         <div className='addGradeTitle font-weight-bold'> Add Grade </div>
         <div>
-          <form className='d-flex flex-column' onSubmit={this.handleSubmit}>
+          <form className='d-flex flex-column mr-5' onSubmit={this.handleSubmit}>
             <div className='inputContainer d-flex flex-column col-xs-3'>
 
-              <div className='input-group-prepend'>
+              <div className='input-group-prepend my-2'>
                 <i className='fas fa-user input-group-text'></i>
                 <input className='form-control' type='text' value={valueOfName} placeholder='Name' onChange={this.handleChangeName} />
               </div>
 
-              <div className='input-group-prepend'>
+              <div className='input-group-prepend my-2'>
                 <i className='fas fa-book-open input-group-text'></i>
                 <input className='form-control' type='text' value={valueOfCourse} placeholder='Course ' onChange={this.handleChangeCourse} />
               </div>
 
-              <div className='input-group-prepend'>
+              <div className='input-group-prepend my-2'>
                 <i className='fas fa-graduation-cap input-group-text'></i>
                 <input className='form-control' type='text' value={valueOfGrade} placeholder='Grade' onChange={this.handleChangeGrade} />
               </div>
 
             </div>
-            <div className='btn-group'>
-              <button type='submit' className='btn btn-primary col-6'> Add </button>
+            <div className='btn-group my-2'>
+              <button type='submit' className='btn btn-primary col-4'> Add </button>
               <div className='btn-group' onClick={this.handleReset}>
                 <button type='reset' className='btn btn-secondary col-12'> Cancel </button>
               </div>

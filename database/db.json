@@ -11,12 +11,6 @@
       "course": "JavaScript",
       "grade": "89",
       "id": 2
-    },
-    {
-      "name": "Patrick",
-      "course": "CyberSecurity",
-      "grade": "80",
-      "id": 3
     }
   ]
 }
