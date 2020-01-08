@@ -64,9 +64,6 @@ class App extends React.Component {
         'Content-Type': 'application/json'
       }
     })
-      .then(response => {
-        return response.json();
-      })
       .then(data => {
         const undeletedData = this.state.grades.filter(student => student.id !== studentId);
         this.setState({

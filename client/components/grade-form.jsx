@@ -42,8 +42,6 @@ class GradeForm extends React.Component {
         course: '',
         grade: ''
       });
-    } else {
-      return this;
     }
   }
 
