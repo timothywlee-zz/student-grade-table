@@ -14,13 +14,13 @@ function GradeTable(props) {
     );
   } else {
     return (
-      <table className='table table-striped w-75 ml-5 mr-5'>
-        <thead >
+      <table className='mainTable table table-striped ml-5 mr-5 col-8'>
+        <thead>
           <tr>
             <th scope='col'> Student Name </th>
             <th scope='col'> Course Name </th>
             <th scope='col'> Grade </th>
-            <th scope='col'> Operations </th>
+            <th className='w-25' scope='col'> Operations </th>
           </tr >
         </thead>
         <tbody>

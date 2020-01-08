@@ -14,6 +14,11 @@ function Grade(props) {
           onClick={ () => props.delete(grade.id) } >
           <i className="fas fa-trash-alt"></i>
         </button>
+        <button
+          type='button'
+          className='btn btn-info ml-1'>
+          <i className="far fa-edit"></i>
+        </button>
       </td>
     </tr>
   );
