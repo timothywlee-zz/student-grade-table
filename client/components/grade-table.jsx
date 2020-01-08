@@ -4,7 +4,7 @@ import Grade from './grade';
 function GradeTable(props) {
   const eachStudentGrade = props.grades.map(student => {
     return (
-      <Grade key={student.id} data={student} />
+      <Grade key={student.id} data={student} delete={props.delete} />
     );
   });
 
@@ -14,15 +14,18 @@ function GradeTable(props) {
     );
   } else {
     return (
-      <table className='table table-striped w-75'>
+      <table className='mainTable table table-striped ml-5 mr-5 col-8'>
         <thead>
           <tr>
-            <th> Student Name </th>
-            <th> Course Name </th>
-            <th> Grade </th>
-          </tr>
-          {eachStudentGrade}
+            <th scope='col'> Student Name </th>
+            <th scope='col'> Course Name </th>
+            <th scope='col'> Grade </th>
+            <th className='w-25' scope='col'> Operations </th>
+          </tr >
         </thead>
+        <tbody>
+          {eachStudentGrade}
+        </tbody>
       </table>
     );
   }

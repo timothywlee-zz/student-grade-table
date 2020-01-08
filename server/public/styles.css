@@ -1,3 +1,6 @@
+.titleSGT{
+  font-size: 40px;
+}
 .title{
   font-size: 30px;
 }
@@ -5,16 +8,25 @@
 .averageScore{
   height: 50%;
   width: 30%;
-  font-size: 1.5rem;
-  margin: 4% 0 0 0;
-  text-align: justify;
+  font-size: 1.8rem;
 }
 
 .badge{
-  line-height: 0.3;
+  line-height: 0.55;
 }
 
 .addGradeTitle {
-  font-size: 20px;
+  font-size: 25px;
+}
+
+.mt-3 {
+  margin-top: 1.3rem!important;
+}
+.mt-4 {
+  margin-top: 1.9rem!important;
+}
+
+.w-25{
+  width: 14%!important;
 }
 

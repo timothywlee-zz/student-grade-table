@@ -11,6 +11,7 @@ class App extends React.Component {
     };
     this.getAllGrades = this.getAllGrades.bind(this);
     this.addStudent = this.addStudent.bind(this);
+    this.deleteStudent = this.deleteStudent.bind(this);
     this.getAverageGrade = this.getAverageGrade.bind(this);
   }
 
@@ -28,9 +29,7 @@ class App extends React.Component {
           grades: data
         });
       })
-      .catch(err => {
-        console.log('An error occured: ', err);
-      });
+      .catch(err => console.error(err));
   }
 
   addStudent(studentInfo) {
@@ -51,9 +50,23 @@ class App extends React.Component {
           grades: arrayDeepCopy
         });
       })
-      .catch(err => {
-        console.error(err);
-      });
+      .catch(err => console.error(err));
+  }
+
+  deleteStudent(studentId) {
+    fetch(`/api/grades/${studentId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(data => {
+        const undeletedData = this.state.grades.filter(student => student.id !== studentId);
+        this.setState({
+          grades: undeletedData
+        });
+      })
+      .catch(err => console.error(err));
   }
 
   getAverageGrade() {
@@ -75,9 +88,9 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <Header average={this.getAverageGrade()} />
+        <Header title='Student Grade Table' average={this.getAverageGrade()} />
         <div className='d-flex flex-row'>
-          <GradeTable grades={this.state.grades} />
+          <GradeTable grades={this.state.grades} delete={this.deleteStudent} />
           <GradeForm onSubmit={this.addStudent}/>
         </div>
       </>

@@ -1,28 +1,16 @@
 {
   "grades": [
     {
-      "id": 1,
-      "name": "Kyle Simpson",
-      "course": "JavaScript",
-      "grade": 100
-    },
-    {
-      "id": 2,
-      "name": "Brendan Eich",
-      "course": "JavaScript",
-      "grade": 50
-    },
-    {
-      "id": 3,
-      "name": "Douglas Crockford",
-      "course": "JavaScript",
-      "grade": 100
-    },
-    {
       "name": "Timothy",
       "course": "JavaScript",
-      "grade": "89",
-      "id": 4
+      "grade": "80",
+      "id": 1
+    },
+    {
+      "name": "Patrick",
+      "course": "CyberSecurity",
+      "grade": "99",
+      "id": 2
     }
   ]
 }
