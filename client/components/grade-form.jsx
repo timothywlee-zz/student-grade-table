@@ -60,35 +60,37 @@ class GradeForm extends React.Component {
     const valueOfGrade = this.state.grade;
 
     return (
-      <div>
-        <div className='addGradeTitle font-weight-bold mt-2'> Add Grade </div>
-        <div>
-          <form className='d-flex flex-column' onSubmit={this.handleSubmit}>
-            <div className='inputContainer d-flex flex-column col-xs-3'>
+      <div className='container'>
+        <div className='row'>
+          <div>
+            <div className='addGradeTitle font-weight-bold mt-2'> Add Grade </div>
+            <form className='d-flex flex-column' onSubmit={this.handleSubmit}>
+              <div className='inputContainer d-flex flex-column col-xs-3'>
 
-              <div className='input-group-prepend my-2'>
-                <i className='fas fa-user input-group-text'></i>
-                <input className='form-control col-12' type='text' value={valueOfName} placeholder='Name' onChange={this.handleChangeName} />
-              </div>
+                <div className='input-group-prepend my-2'>
+                  <i className='fas fa-user input-group-text'></i>
+                  <input className='form-control col-12' type='text' value={valueOfName} placeholder='Name' onChange={this.handleChangeName} />
+                </div>
 
-              <div className='input-group-prepend my-2'>
-                <i className='fas fa-book-open input-group-text'></i>
-                <input className='form-control col-12' type='text' value={valueOfCourse} placeholder='Course ' onChange={this.handleChangeCourse} />
-              </div>
+                <div className='input-group-prepend my-2'>
+                  <i className='fas fa-book-open input-group-text'></i>
+                  <input className='form-control col-12' type='text' value={valueOfCourse} placeholder='Course ' onChange={this.handleChangeCourse} />
+                </div>
 
-              <div className='input-group-prepend my-2'>
-                <i className='fas fa-graduation-cap input-group-text'></i>
-                <input className='form-control col-12' type='text' value={valueOfGrade} placeholder='Grade' onChange={this.handleChangeGrade} />
-              </div>
+                <div className='input-group-prepend my-2'>
+                  <i className='fas fa-graduation-cap input-group-text'></i>
+                  <input className='form-control col-12' type='text' value={valueOfGrade} placeholder='Grade' onChange={this.handleChangeGrade} />
+                </div>
 
-            </div>
-            <div className='btn-group my-2'>
-              <button type='submit' className='btn btn-primary col-4'> Add </button>
-              <div className='btn-group' onClick={this.handleReset}>
-                <button type='reset' className='btn btn-secondary col-12'> Cancel </button>
               </div>
-            </div>
-          </form>
+              <div className='btn-group my-2'>
+                <button type='submit' className='btn btn-primary col-4'> Add </button>
+                <div className='btn-group' onClick={this.handleReset}>
+                  <button type='reset' className='btn btn-secondary col-12'> Cancel </button>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     );

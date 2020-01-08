@@ -1,15 +1,15 @@
 {
   "grades": [
     {
-      "id": 1,
-      "name": "Douglas Crockford",
-      "course": "JavaScript",
-      "grade": 100
-    },
-    {
-      "name": "Timothy Lee",
+      "name": "Timothy",
       "course": "JavaScript",
       "grade": "80",
+      "id": 1
+    },
+    {
+      "name": "Patrick",
+      "course": "CyberSecurity",
+      "grade": "99",
       "id": 2
     }
   ]
