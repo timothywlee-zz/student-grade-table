@@ -11,6 +11,7 @@ class App extends React.Component {
     };
     this.getAllGrades = this.getAllGrades.bind(this);
     this.addStudent = this.addStudent.bind(this);
+    this.deleteStudent = this.deleteStudent.bind(this);
     this.getAverageGrade = this.getAverageGrade.bind(this);
   }
 
@@ -56,6 +57,27 @@ class App extends React.Component {
       });
   }
 
+  deleteStudent(studentId) {
+    fetch(`/api/grades/${studentId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        const undeletedData = this.state.grades.filter(student => student.id !== studentId);
+        this.setState({
+          grades: undeletedData
+        });
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
   getAverageGrade() {
     const totalStudents = this.state.grades.length;
     let totalSum = 0;
@@ -77,7 +99,7 @@ class App extends React.Component {
       <>
         <Header average={this.getAverageGrade()} />
         <div className='d-flex flex-row'>
-          <GradeTable grades={this.state.grades} />
+          <GradeTable grades={this.state.grades} delete={this.deleteStudent} />
           <GradeForm onSubmit={this.addStudent}/>
         </div>
       </>

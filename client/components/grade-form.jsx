@@ -34,12 +34,17 @@ class GradeForm extends React.Component {
       course: this.state.course,
       grade: this.state.grade
     };
-    this.props.onSubmit(createNewStudent);
-    this.setState({
-      name: '',
-      course: '',
-      grade: ''
-    });
+
+    if (createNewStudent.name.length !== 0 || createNewStudent.course.length !== 0 || createNewStudent.grade.length !== 0) {
+      this.props.onSubmit(createNewStudent);
+      this.setState({
+        name: '',
+        course: '',
+        grade: ''
+      });
+    } else {
+      return this;
+    }
   }
 
   handleReset(event) {
