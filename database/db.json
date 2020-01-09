@@ -1,16 +1,22 @@
 {
   "grades": [
     {
-      "name": "Timothy",
+      "name": "Tim",
       "course": "JavaScript",
       "grade": "80",
       "id": 1
     },
     {
-      "name": "Patrick",
-      "course": "CyberSecurity",
-      "grade": "99",
+      "name": "blah",
+      "course": "blahblah",
+      "grade": "90",
       "id": 2
+    },
+    {
+      "name": "bap",
+      "course": "bapbap",
+      "grade": "35",
+      "id": 3
     }
   ]
 }

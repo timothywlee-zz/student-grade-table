@@ -7,12 +7,15 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      grades: []
+      grades: [],
+      isUpdating: false,
+      targetedStudentToUpdate: null
     };
     this.getAllGrades = this.getAllGrades.bind(this);
     this.addStudent = this.addStudent.bind(this);
     this.deleteStudent = this.deleteStudent.bind(this);
-    this.getAverageGrade = this.getAverageGrade.bind(this);
+    this.updateStudent = this.updateStudent.bind(this);
+    this.updateStudentById = this.updateStudentById.bind(this);
   }
 
   componentDidMount() {
@@ -20,10 +23,10 @@ class App extends React.Component {
   }
 
   getAllGrades() {
-    fetch('/api/grades')
-      .then(response => {
-        return response.json();
-      })
+    fetch('/api/grades', {
+      method: 'GET'
+    })
+      .then(response => { return response.json(); })
       .then(data => {
         this.setState({
           grades: data
@@ -40,9 +43,7 @@ class App extends React.Component {
       },
       body: JSON.stringify(studentInfo)
     })
-      .then(response => {
-        return response.json();
-      })
+      .then(response => { return response.json(); })
       .then(data => {
         const arrayDeepCopy = this.state.grades.map(student => Object.assign({}, student));
         arrayDeepCopy.push(data);
@@ -69,6 +70,37 @@ class App extends React.Component {
       .catch(err => console.error(err));
   }
 
+  updateStudent(studentInfo, studentId) {
+    fetch(`/api/grades/${studentId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(studentInfo)
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        const deepCopy = this.state.grades.map(student => Object.assign({}, student));
+        const idMatch = deepCopy.findIndex(student => student.id === studentId);
+        deepCopy[idMatch] = data;
+        this.setState({
+          grades: deepCopy,
+          isUpdating: false
+        });
+      })
+      .catch(err => { console.error(err); });
+  }
+
+  updateStudentById(studentInfo) {
+    const studentInfoForUpdate = studentInfo;
+    this.setState({
+      targetedStudentToUpdate: studentInfoForUpdate,
+      isUpdating: true
+    });
+  }
+
   getAverageGrade() {
     const totalStudents = this.state.grades.length;
     let totalSum = 0;
@@ -81,6 +113,7 @@ class App extends React.Component {
     averageArray.forEach(function (grade) {
       totalSum += parseInt(grade);
     });
+
     const averageNumber = parseFloat(totalSum / totalStudents).toFixed(1);
     return totalStudents === 0 ? 'N/A' : averageNumber;
   }
@@ -90,8 +123,8 @@ class App extends React.Component {
       <>
         <Header title='Student Grade Table' average={this.getAverageGrade()} />
         <div className='d-flex flex-row'>
-          <GradeTable grades={this.state.grades} delete={this.deleteStudent} />
-          <GradeForm onSubmit={this.addStudent}/>
+          <GradeTable grades={this.state.grades} delete={this.deleteStudent} update={this.updateStudentById} />
+          <GradeForm onAddSubmit={this.addStudent} onUpdateSubmit={this.updateStudent} isUpdating={this.state.isUpdating} targetedStudentToUpdate={this.state.targetedStudentToUpdate}/>
         </div>
       </>
     );
