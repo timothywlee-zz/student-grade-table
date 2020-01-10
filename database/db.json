@@ -2,8 +2,8 @@
   "grades": [
     {
       "name": "Tim",
-      "course": "JavaScript",
-      "grade": "80",
+      "course": "React",
+      "grade": "33",
       "id": 1
     },
     {
