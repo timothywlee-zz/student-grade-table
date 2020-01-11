@@ -119,9 +119,10 @@ class App extends React.Component {
   }
 
   render() {
+    const averageGrade = this.getAverageGrade();
     return (
       <>
-        <Header title='Student Grade Table' average={this.getAverageGrade()} />
+        <Header title='Student Grade Table' average={averageGrade} />
         <div className='d-flex flex-row'>
           <GradeTable grades={this.state.grades} delete={this.deleteStudent} update={this.updateStudentById} />
           <GradeForm onAddSubmit={this.addStudent} onUpdateSubmit={this.updateStudent} isUpdating={this.state.isUpdating} targetedStudentToUpdate={this.state.targetedStudentToUpdate}/>
