@@ -23,7 +23,7 @@ Link:https://student-grade-table.timothywlee.com
 * User can view the average grade
 
 # Preview
-![] 
+![preview image](student-grade-table-preview.png)
 
 # Development
 ## System Requirements
