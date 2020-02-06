@@ -4,13 +4,15 @@ import Grade from './grade';
 function GradeTable(props) {
   const eachStudentGrade = props.grades.map(student => {
     return (
-      <Grade key={student.id} data={student} delete={props.delete} update={props.update} />
+      <Grade key={student.id} student={student} delete={props.delete} update={props.update} />
     );
   });
 
   if (props.grades.length === 0) {
     return (
-      <div> No Grades Recorded </div>
+      <div className='row'>
+        <h1 className='col-md-3 ml-4'> No Grades Recorded </h1>
+      </div>
     );
   } else {
     return (

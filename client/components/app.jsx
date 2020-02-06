@@ -18,16 +18,18 @@ class App extends React.Component {
     this.updateStudentById = this.updateStudentById.bind(this);
   }
 
-  componentDidMount() {
+  componentDidMount() { // where you initialize the network request (GET) /load data from a remote endpoint
     this.getAllGrades();
   }
 
   getAllGrades() {
-    fetch('/api/grades', {
+    fetch('/api/grades', { // fetch function returns a PROMISE
       method: 'GET'
     })
-      .then(response => { return response.json(); })
-      .then(data => {
+      .then(response => { // the success function for that PROMISE will have an argument that is a response(an object)
+        return response.json(); // parses the JSON object to a javascript object (arrays are objects!)
+      })
+      .then(data => { // data (the javascript object) is an array
         this.setState({
           grades: data
         });
@@ -35,17 +37,17 @@ class App extends React.Component {
       .catch(err => console.error(err));
   }
 
-  addStudent(studentInfo) {
+  addStudent(studentInfo) { // studentInfo is an object {name: 'asdfa' course:'dsfa' grade'#'}
     fetch('/api/grades', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(studentInfo)
+      body: JSON.stringify(studentInfo) // Javascript object --> JSON string
     })
       .then(response => { return response.json(); })
       .then(data => {
-        const arrayDeepCopy = this.state.grades.map(student => Object.assign({}, student));
+        const arrayDeepCopy = this.state.grades.map(student => Object.assign({}, student)); // or const arrayShallowCopy = [...this.state.grades]
         arrayDeepCopy.push(data);
         this.setState({
           grades: arrayDeepCopy
@@ -104,17 +106,10 @@ class App extends React.Component {
   getAverageGrade() {
     const totalStudents = this.state.grades.length;
     let totalSum = 0;
-    const averageArray = [];
-
-    for (let index = 0; index < totalStudents; index++) {
-      const eachStudentGrade = this.state.grades[index].grade;
-      averageArray.push(eachStudentGrade);
-    }
-    averageArray.forEach(function (grade) {
-      totalSum += parseInt(grade);
+    this.state.grades.map(student => {
+      totalSum += parseInt(student.grade);
     });
-
-    const averageNumber = parseFloat(totalSum / totalStudents).toFixed(1);
+    const averageNumber = (totalSum / totalStudents).toFixed(1);
     return totalStudents === 0 ? 'N/A' : averageNumber;
   }
 
@@ -122,10 +117,19 @@ class App extends React.Component {
     const averageGrade = this.getAverageGrade();
     return (
       <>
-        <Header title='Student Grade Table' average={averageGrade} />
+        <Header
+          title='Student Grade Table'
+          average={averageGrade} />
         <div className='d-flex flex-row'>
-          <GradeTable grades={this.state.grades} delete={this.deleteStudent} update={this.updateStudentById} />
-          <GradeForm onAddSubmit={this.addStudent} onUpdateSubmit={this.updateStudent} isUpdating={this.state.isUpdating} targetedStudentToUpdate={this.state.targetedStudentToUpdate}/>
+          <GradeTable
+            grades={this.state.grades}
+            delete={this.deleteStudent}
+            update={this.updateStudentById} />
+          <GradeForm
+            onAddSubmit={this.addStudent}
+            onUpdateSubmit={this.updateStudent}
+            isUpdating={this.state.isUpdating}
+            targetedStudentToUpdate={this.state.targetedStudentToUpdate}/>
         </div>
       </>
     );

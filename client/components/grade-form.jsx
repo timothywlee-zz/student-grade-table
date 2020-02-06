@@ -65,7 +65,7 @@ class GradeForm extends React.Component {
         course: this.state.course,
         grade: this.state.grade
       };
-      if (createNewStudent.name.length !== 0 || createNewStudent.course.length !== 0 || createNewStudent.grade.length !== 0) {
+      if (createNewStudent.name.length !== 0 && createNewStudent.course.length !== 0 && createNewStudent.grade > 0) {
         this.props.onAddSubmit(createNewStudent);
         this.setState({
           name: '',
@@ -94,7 +94,9 @@ class GradeForm extends React.Component {
   }
 
   toggleAddOrUpdate() {
-    return this.props.isUpdating ? <button type='submit' className='btn btn-warning col-4'> Update </button> : <button type='submit' className='btn btn-primary col-4'> Add </button>;
+    return this.props.isUpdating
+      ? <button type='submit' className='btn btn-warning col-4'> Update </button>
+      : <button type='submit' className='btn btn-primary col-4'> Add </button>;
   }
 
   render() {
@@ -125,7 +127,8 @@ class GradeForm extends React.Component {
                   <i className='fas fa-book-open input-group-text'></i>
                   <input
                     className='form-control col-12'
-                    type='text' value={valueOfCourse}
+                    type='text'
+                    value={valueOfCourse}
                     placeholder='Course'
                     onChange={this.props.isUpdating ? this.handleUpdateChangeCourse : this.handleChangeCourse} />
                 </div>
@@ -134,7 +137,8 @@ class GradeForm extends React.Component {
                   <i className='fas fa-graduation-cap input-group-text'></i>
                   <input
                     className='form-control col-12'
-                    type='text' value={valueOfGrade}
+                    type='text'
+                    value={valueOfGrade}
                     placeholder='Grade'
                     onChange={this.props.isUpdating ? this.handleUpdateChangeGrade : this.handleChangeGrade} />
                 </div>

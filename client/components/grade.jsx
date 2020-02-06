@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Grade(props) {
-  const student = props.data;
+  const student = props.student;
 
   return (
     <tr>
