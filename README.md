@@ -1,21 +1,26 @@
 # Student Grade Table
-- description 
+A content management system that can create, read, update, and delete (CRUD) student grade information from a database and displays the data in a table with a user-friendly interface to manage student grade records. Both mobile and desktop responsive. 
 
 # Live Demo
-Link:
+Link:https://student-grade-table.timothywlee.com
 
 # Technologies Used
 * Node.js
 * React
 * JavaScript
 * PostgreSQL
+* AJAX
 * HTML5
 * CSS3
 * Bootstrap 4
 * AWS EC2
 
 # Features
-* 
+* User can view all grades
+* User can add a grade
+* User can delete a grade
+* User can update a grade
+* User can view the average grade
 
 # Preview
 ![] 
